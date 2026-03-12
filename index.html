@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Feliz Cumpleaños Vale 🌹</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Raleway:wght@300;400;700;900&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0a0008;
+      --deep:      #120010;
+      --red:       #C0192B;
+      --red-soft:  #E8445A;
+      --red-glow:  #FF6B7A;
+      --rose-dark: #8B0E1E;
+      --cream:     #F5EAE0;
+      --gold:      #C9963A;
+      --white:     #FDF6F0;
+    }
+
+    body {
+      min-height: 100vh;
+      background: var(--bg);
+      font-family: 'Raleway', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    /* ===== BACKGROUND ===== */
+    .bg {
+      position: fixed; inset: 0; z-index: 0;
+      background:
+        radial-gradient(ellipse 70% 50% at 15% 20%, rgba(140,10,30,0.3) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 60% at 85% 80%, rgba(100,5,20,0.25) 0%, transparent 60%),
+        radial-gradient(ellipse 100% 100% at 50% 50%, #120010 0%, #0a0008 100%);
+    }
+
+    /* ===== PETALS ===== */
+    .petals { position: fixed; inset: 0; z-index: 1; pointer-events: none; }
+    .petal {
+      position: absolute;
+      font-size: 1.1rem;
+      opacity: 0;
+      animation: petalFall linear infinite;
+      filter: drop-shadow(0 0 4px rgba(192,25,43,0.5));
+    }
+    @keyframes petalFall {
+      0%   { opacity: 0;   transform: translateY(-30px) rotate(0deg) scale(0.7); }
+      10%  { opacity: 0.8; }
+      90%  { opacity: 0.4; }
+      100% { opacity: 0;   transform: translateY(108vh) rotate(540deg) scale(1.1); }
+    }
+
+    /* ===== FLOATING MUSIC NOTES ===== */
+    .notes { position: fixed; inset: 0; z-index: 1; pointer-events: none; }
+    .note {
+      position: absolute;
+      color: rgba(192,25,43,0.35);
+      font-size: 1rem;
+      opacity: 0;
+      animation: noteFloat linear infinite;
+    }
+    @keyframes noteFloat {
+      0%   { opacity: 0; transform: translateY(100vh) rotate(-10deg); }
+      15%  { opacity: 0.6; }
+      85%  { opacity: 0.3; }
+      100% { opacity: 0; transform: translateY(-10vh) rotate(10deg); }
+    }
+
+    /* ===== GLOW ORBS ===== */
+    .orb {
+      position: fixed; border-radius: 50%;
+      filter: blur(90px); z-index: 0;
+      animation: orbPulse ease-in-out infinite alternate;
+      pointer-events: none;
+    }
+    @keyframes orbPulse {
+      from { opacity: 0.3; transform: scale(0.9); }
+      to   { opacity: 0.6; transform: scale(1.1); }
+    }
+
+    /* ===== STARS ===== */
+    .stars { position: fixed; inset: 0; z-index: 1; pointer-events: none; }
+    .star {
+      position: absolute; background: #FDF6F0; border-radius: 50%;
+      animation: twinkle ease-in-out infinite alternate;
+    }
+    @keyframes twinkle {
+      from { opacity: 0.03; transform: scale(0.5); }
+      to   { opacity: 0.7;  transform: scale(1.3); }
+    }
+
+    /* ===== CARD ===== */
+    .card {
+      position: relative; z-index: 10;
+      width: min(560px, 92vw);
+      background: linear-gradient(160deg, rgba(25,5,20,0.97), rgba(10,0,8,0.99));
+      border: 1px solid rgba(192,25,43,0.35);
+      border-radius: 28px;
+      padding: 50px 52px 46px;
+      text-align: center;
+      box-shadow:
+        0 0 0 1px rgba(192,25,43,0.1),
+        0 0 50px rgba(140,10,30,0.3),
+        0 0 120px rgba(140,10,30,0.1),
+        0 40px 80px rgba(0,0,0,0.7);
+      animation: cardReveal 1s cubic-bezier(0.34,1.4,0.64,1) both;
+    }
+    @keyframes cardReveal {
+      from { opacity: 0; transform: scale(0.72) translateY(40px); }
+      to   { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    /* top glow bar */
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 12%; right: 12%; height: 1.5px;
+      background: linear-gradient(90deg, transparent, var(--red-soft), var(--red-glow), var(--red-soft), transparent);
+      border-radius: 99px;
+    }
+
+    /* ===== BIG ROSE ===== */
+    .big-rose {
+      font-size: 4rem;
+      display: block;
+      margin-bottom: 12px;
+      opacity: 0;
+      animation: rosePop 0.8s cubic-bezier(0.34,1.56,0.64,1) both, roseSway 3s ease-in-out infinite alternate;
+      animation-delay: 0.3s, 1.5s;
+      filter: drop-shadow(0 0 20px rgba(192,25,43,0.7));
+    }
+    @keyframes rosePop {
+      from { opacity: 0; transform: scale(0) rotate(-30deg); }
+      to   { opacity: 1; transform: scale(1) rotate(0deg); }
+    }
+    @keyframes roseSway {
+      from { transform: rotate(-4deg) scale(1); }
+      to   { transform: rotate(4deg) scale(1.06); }
+    }
+
+    /* ===== BAND TAG ===== */
+    .band-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(192,25,43,0.1);
+      border: 1px solid rgba(192,25,43,0.3);
+      border-radius: 99px;
+      padding: 5px 18px;
+      font-size: 0.68rem;
+      font-weight: 900;
+      letter-spacing: 0.35em;
+      color: var(--red-soft);
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      opacity: 0;
+      animation: fadeUp 0.5s ease both;
+      animation-delay: 0.6s;
+    }
+
+    /* ===== TITLE ===== */
+    .title {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(1.4rem, 4.5vw, 2rem);
+      color: rgba(253,246,240,0.8);
+      margin-bottom: 4px;
+      opacity: 0;
+      animation: fadeUp 0.5s ease both;
+      animation-delay: 0.8s;
+      letter-spacing: 0.05em;
+    }
+
+    /* ===== NAME ===== */
+    .name {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 700;
+      font-size: clamp(4rem, 13vw, 6rem);
+      line-height: 1;
+      margin-bottom: 24px;
+      background: linear-gradient(135deg, var(--red-glow) 0%, var(--cream) 45%, var(--red-soft) 75%, var(--gold) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      opacity: 0;
+      animation: nameReveal 0.9s cubic-bezier(0.34,1.56,0.64,1) both;
+      animation-delay: 1s;
+      filter: drop-shadow(0 0 25px rgba(192,25,43,0.4));
+    }
+    @keyframes nameReveal {
+      from { opacity: 0; transform: scale(0.4) rotate(-8deg); }
+      to   { opacity: 1; transform: scale(1) rotate(0deg); }
+    }
+
+    /* ===== DIVIDER ===== */
+    .divider {
+      display: flex; align-items: center; gap: 12px;
+      margin: 0 auto 24px;
+      opacity: 0;
+      animation: fadeUp 0.5s ease both;
+      animation-delay: 1.3s;
+    }
+    .divider-line {
+      flex: 1; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(192,25,43,0.4), transparent);
+    }
+    .divider-rose { font-size: 0.85rem; }
+
+    /* ===== MESSAGE ===== */
+    .message {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      color: rgba(253,246,240,0.78);
+      line-height: 1.9;
+      margin-bottom: 28px;
+      opacity: 0;
+      animation: fadeUp 0.5s ease both;
+      animation-delay: 1.5s;
+    }
+
+    /* ===== SONG REFERENCES ===== */
+    .songs-box {
+      background: rgba(192,25,43,0.07);
+      border: 1px solid rgba(192,25,43,0.2);
+      border-radius: 14px;
+      padding: 18px 22px;
+      margin-bottom: 24px;
+      opacity: 0;
+      animation: fadeUp 0.5s ease both, boxGlow 3s ease-in-out infinite alternate;
+      animation-delay: 1.7s, 2.8s;
+    }
+    @keyframes boxGlow {
+      from { box-shadow: 0 0 8px rgba(192,25,43,0.1); }
+      to   { box-shadow: 0 0 25px rgba(192,25,43,0.3); }
+    }
+    .songs-label {
+      font-size: 0.62rem;
+      font-weight: 900;
+      letter-spacing: 0.3em;
+      color: var(--red-soft);
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      display: block;
+    }
+    .songs-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+    }
+    .song-pill {
+      background: rgba(192,25,43,0.12);
+      border: 1px solid rgba(232,68,90,0.25);
+      border-radius: 99px;
+      padding: 4px 12px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: rgba(253,246,240,0.75);
+      letter-spacing: 0.04em;
+    }
+
+    /* ===== CLOSING ===== */
+    .closing {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 0.95rem;
+      color: rgba(253,246,240,0.5);
+      opacity: 0;
+      animation: fadeUp 0.5s ease both;
+      animation-delay: 2s;
+      letter-spacing: 0.04em;
+    }
+    .closing span {
+      color: var(--red-soft);
+      font-style: normal;
+      font-weight: 700;
+    }
+
+    /* ===== CORNER DECORATIONS ===== */
+    .corner {
+      position: absolute;
+      opacity: 0.35;
+      animation: cornerSway ease-in-out infinite alternate;
+    }
+    @keyframes cornerSway {
+      from { transform: rotate(-8deg) scale(0.85); opacity: 0.2; }
+      to   { transform: rotate(8deg) scale(1.1); opacity: 0.55; }
+    }
+
+    /* ===== MUSIC PLAYER ===== */
+    .music-player {
+      margin: 24px 0 20px;
+      opacity: 0;
+      animation: fadeUp 0.5s ease both;
+      animation-delay: 1.85s;
+    }
+    .play-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, rgba(192,25,43,0.25), rgba(140,10,30,0.15));
+      border: 1px solid rgba(232,68,90,0.45);
+      border-radius: 99px;
+      padding: 12px 26px;
+      cursor: pointer;
+      color: var(--cream);
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      transition: all 0.3s ease;
+    }
+    .play-btn:hover {
+      background: linear-gradient(135deg, rgba(192,25,43,0.4), rgba(140,10,30,0.3));
+      box-shadow: 0 0 20px rgba(192,25,43,0.4);
+      transform: scale(1.04);
+    }
+    .play-icon { font-size: 1.1rem; color: var(--red-soft); }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg"></div>
+  <div class="orb" style="width:450px;height:450px;background:rgba(140,10,30,0.2);top:-150px;left:-150px;animation-duration:6s;"></div>
+  <div class="orb" style="width:350px;height:350px;background:rgba(100,5,15,0.18);bottom:-100px;right:-100px;animation-duration:8s;animation-delay:2s;"></div>
+
+  <div class="stars" id="stars"></div>
+  <div class="petals" id="petals"></div>
+  <div class="notes" id="notes"></div>
+
+  <div class="card">
+    <span class="corner" style="top:18px;left:22px;font-size:1.2rem;animation-delay:0s">🌹</span>
+    <span class="corner" style="top:18px;right:22px;font-size:1.2rem;animation-delay:0.7s">🌹</span>
+    <span class="corner" style="bottom:18px;left:22px;font-size:0.9rem;color:#C0192B;animation-delay:1.2s">✦</span>
+    <span class="corner" style="bottom:18px;right:22px;font-size:0.9rem;color:#C0192B;animation-delay:1.8s">✦</span>
+
+    <span class="big-rose">🌹</span>
+
+    <div class="band-tag">🌹 The Rose 더 로즈 🌹</div>
+
+    <div class="title">¡Feliz Cumpleaños!</div>
+    <div class="name">Vale</div>
+
+    <div class="divider">
+      <div class="divider-line"></div>
+      <span class="divider-rose">🌹</span>
+      <div class="divider-line"></div>
+    </div>
+
+    <p class="message">
+      Que este día te llene de todo lo que<br/>
+      The Rose pone en su música:<br/>
+      emoción, belleza y algo que se queda<br/>
+      contigo para siempre. 🌹<br/><br/>
+      Eres una <em>Black Rose</em> — única,<br/>
+      profunda y absolutamente especial.
+    </p>
+
+    <div class="songs-box">
+      <span class="songs-label">🎸 un playlist solo para ti hoy 🎸</span>
+      <div class="songs-list">
+        <span class="song-pill">She's in the Rain</span>
+        <span class="song-pill">RED</span>
+        <span class="song-pill">Black Rose</span>
+        <span class="song-pill">Like We Used To</span>
+        <span class="song-pill">You're Beautiful</span>
+        <span class="song-pill">Heal</span>
+      </div>
+    </div>
+
+    <!-- Music Player -->
+    <div class="music-player">
+      <button class="play-btn" id="playBtn" onclick="toggleMusic()">
+        <span class="play-icon" id="playIcon">▶</span>
+        <span id="playLabel">She's in the Rain — The Rose</span>
+      </button>
+      <iframe id="ytFrame"
+        style="display:none;width:0;height:0;border:0"
+        src=""
+        allow="autoplay"
+        allowfullscreen>
+      </iframe>
+    </div>
+
+    <div class="closing">
+      <span>🌹</span> porque aunque no vengan a Colombia,<br/>
+      su música siempre encuentra el camino hasta acá <span>🌹</span>
+    </div>
+  </div>
+
+  <script>
+    // Stars
+    const starsEl = document.getElementById('stars');
+    for (let i = 0; i < 100; i++) {
+      const s = document.createElement('div');
+      s.className = 'star';
+      const size = Math.random() * 2 + 0.5;
+      s.style.cssText = `width:${size}px;height:${size}px;top:${Math.random()*100}%;left:${Math.random()*100}%;animation-duration:${1.5+Math.random()*3}s;animation-delay:${Math.random()*4}s;`;
+      starsEl.appendChild(s);
+    }
+
+    // Petals
+    const petalsEl = document.getElementById('petals');
+    const petalEmojis = ['🌹','🌸','🌺','❤️','🥀'];
+    for (let i = 0; i < 22; i++) {
+      const p = document.createElement('div');
+      p.className = 'petal';
+      p.textContent = petalEmojis[Math.floor(Math.random()*petalEmojis.length)];
+      p.style.cssText = `left:${Math.random()*100}%;font-size:${0.8+Math.random()*1}rem;animation-duration:${6+Math.random()*8}s;animation-delay:${Math.random()*8}s;`;
+      petalsEl.appendChild(p);
+    }
+
+    // Notes
+    const notesEl = document.getElementById('notes');
+    const noteChars = ['♪','♫','♬','♩'];
+    for (let i = 0; i < 12; i++) {
+      const n = document.createElement('div');
+      n.className = 'note';
+      n.textContent = noteChars[Math.floor(Math.random()*noteChars.length)];
+      n.style.cssText = `left:${Math.random()*100}%;font-size:${0.8+Math.random()*0.8}rem;animation-duration:${7+Math.random()*8}s;animation-delay:${Math.random()*7}s;`;
+      notesEl.appendChild(n);
+    }
+    let playing = false;
+    function toggleMusic() {
+      const frame = document.getElementById("ytFrame");
+      const icon = document.getElementById("playIcon");
+      const label = document.getElementById("playLabel");
+      if (!playing) {
+        frame.src = "https://www.youtube.com/embed/lZHA8hyrTUQ?autoplay=1&loop=1&playlist=lZHA8hyrTUQ&controls=0";
+        icon.textContent = "⏸";
+        label.textContent = "Pausar música";
+        playing = true;
+      } else {
+        frame.src = "";
+        icon.textContent = "▶";
+        label.textContent = "She's in the Rain — The Rose";
+        playing = false;
+      }
+    }
+  </script>
+</body>
+</html>
